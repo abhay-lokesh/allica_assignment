@@ -1,4 +1,4 @@
-import type { SectionContainerProps } from "~/types/common.type";
+import type { SectionContainerProps } from "~/types/container.types";
 
 const SectionContainer = ({
   header,
