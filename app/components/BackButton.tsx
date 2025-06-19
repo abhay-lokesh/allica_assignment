@@ -7,7 +7,13 @@ const BackButton = () => {
   const handleGoBack = () => {
     navigate(-1); // Navigates back one entry in the history stack
   };
-  return <Button icon="circle-chevron-left" onButtonClick={handleGoBack} />;
+  return (
+    <Button
+      styles={{ variant: "ICON", size: "SM" }}
+      icon="circle-chevron-left"
+      onButtonClick={handleGoBack}
+    />
+  );
 };
 
 export default BackButton;
