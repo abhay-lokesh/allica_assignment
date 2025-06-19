@@ -13,22 +13,22 @@ export const createCharacterSlice: StateCreator<
   characterMap: {},
   characterNames: [],
   pages: 0,
-  currentPage: 0,
+  currentPage: 1,
   pageSize: 0,
   paginateSimple: (order) =>
     set((state) => {
-      let page = 0;
+      let page = 1;
       if (order === "LAST") {
         page = state.pages;
       } else if (order === "NEXT") {
         page =
-          state.currentPage + 1 > state.pages
+          state.currentPage >= state.pages
             ? state.pages
             : state.currentPage + 1;
       } else if (order === "PREV") {
-        page = state.currentPage > 0 ? state.currentPage - 1 : 0;
+        page = state.currentPage > 1 ? state.currentPage - 1 : 1;
       }
-      const start = page ? page * state.pageSize : page;
+      const start = page === 1 ? page - 1 : page * state.pageSize;
       const names = state.characterNames.slice(start, start + state.pageSize);
       let paginatedCharacters: CharacterDisplay[] = [];
       names.forEach((name) => {
@@ -41,7 +41,7 @@ export const createCharacterSlice: StateCreator<
       };
     }),
   initData: (initialData: CharacterDisplay[], pageSize = 10) =>
-    set(() => {
+    set((state) => {
       console.log("INITIAL DATA", initialData);
       let total = 0;
       const modifiedObj = initialData.reduce(
@@ -60,8 +60,10 @@ export const createCharacterSlice: StateCreator<
           characterNames: [] as string[],
         }
       );
+      console.log(state.currentPage, state.currentPage + pageSize);
+      const start = state.currentPage !== 1 ? state.currentPage * pageSize : 0;
       return {
-        characters: initialData.slice(0, pageSize),
+        characters: initialData.slice(start, start + pageSize),
         ...modifiedObj,
         pageSize,
         pages: Math.floor(total / pageSize),
@@ -72,7 +74,6 @@ export const createCharacterSlice: StateCreator<
       /**
        * This line ensures that we are maintaining the order
        */
-      console.log("CHECKING", state.characterNames);
       const start = page * pageSize;
       const names = state.characterNames.slice(start, start + pageSize);
       let paginatedCharacters: CharacterDisplay[] = [];
@@ -101,5 +102,19 @@ export const createCharacterSlice: StateCreator<
       };
     }),
 
-  //   updateCharacter: () => set(),
+  updateCharacter: (
+    value: string,
+    key: string,
+    param: keyof CharacterDisplay
+  ) =>
+    set((state) => {
+      let characterMap = { ...state.characterMap };
+      if (characterMap[key]) {
+        const character = { ...characterMap[key], [param]: value };
+        characterMap = { ...characterMap, [key]: character };
+      }
+      return {
+        characterMap: { ...characterMap },
+      };
+    }),
 });

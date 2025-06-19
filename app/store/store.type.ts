@@ -16,5 +16,9 @@ export interface CharacterSlice {
   currentPage: number;
   pageSize: number;
   paginateSimple: (order: "LAST" | "FIRST" | "NEXT" | "PREV") => void;
-  //   updateCharacter: () => void;
+  updateCharacter: (
+    value: string,
+    key: string,
+    param: keyof CharacterDisplay
+  ) => void;
 }
