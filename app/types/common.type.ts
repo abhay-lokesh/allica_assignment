@@ -25,7 +25,8 @@ export interface FlexboxProps extends ComponentProps<"div"> {
   responsive?: "ADAPTIVE" | "NONE";
 }
 export interface ButtonProps extends ComponentProps<"button">, IconProps {
+  onButtonClick: () => void;
   text?: string;
-  variant?: "OUTLINE" | "FILLED" | "GHOST";
-  onButtonClick?: () => void;
+  state?: "DISABLED" | "LOADING" | null;
+  styles?: { variant?: "OUTLINE" | "FILLED" | "GHOST" | "ICON"; size?: Sizes };
 }

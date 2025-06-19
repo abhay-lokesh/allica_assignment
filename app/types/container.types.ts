@@ -2,11 +2,12 @@ import type { ComponentProps, ReactElement } from "react";
 
 export interface SectionContainerProps extends ComponentProps<"section"> {
   header?: string;
+  variant?: "SECTION" | "PAGE";
 }
 
 export type CellConfig = {
   key: string;
-  type: "sync" | "async" | "quer_async" | "parent_fn";
+  type: "sync" | "async" | "query_async" | "button";
   format: "string" | "number" | "date" | "currency";
   header: string;
 };
@@ -15,19 +16,19 @@ export interface TableContainerProps<DataType> extends ComponentProps<"table"> {
   description: string;
   cellRender: (args: any) => ReactElement;
   cellConfigs: CellConfig[];
-  onRowClick: (arg: CellConfig) => void;
+  onRowClick: (arg: DataType) => void;
   variant: "STICKY" | "NORMAL";
 }
 
 export interface QueryContainerProps {
   url: string;
-  LoaderElement: ReactElement;
   keys: string[];
+  LoaderElement?: ReactElement;
   render: (data: any, isLoading: boolean) => ReactElement;
 }
 export interface QueriesContainerProps {
   urls: string[];
   key: string;
+  LoaderElement?: ReactElement;
   render: (data: any, isLoading: boolean) => ReactElement;
-  LoaderElement: ReactElement;
 }
