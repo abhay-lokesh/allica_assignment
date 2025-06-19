@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import Button from "./Button";
+import { ACCESIBILITY_TEXT } from "~/constants/accessibility.constant";
 
 const BackButton = () => {
   const navigate = useNavigate();
@@ -9,8 +10,11 @@ const BackButton = () => {
   };
   return (
     <Button
-      styles={{ variant: "ICON", size: "SM" }}
-      icon="circle-chevron-left"
+      styles={{ variant: "ICON", size: "XS" }}
+      iconConfig={{
+        icon: "circle-chevron-left",
+        label: ACCESIBILITY_TEXT.BACK_NAVIGATE,
+      }}
       onButtonClick={handleGoBack}
     />
   );

@@ -1,6 +1,7 @@
 import type { IconName } from "lucide-react/dynamic";
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactElement } from "react";
 import type { CharacterDisplay } from "./character.type";
+import type { CellConfig } from "./container.types";
 
 export type Primitive = string | number | boolean;
 export type Sizes = "XS" | "SM" | "MD" | "LG";
@@ -51,4 +52,20 @@ export interface CharacterUpdateProps {
 export interface InputProps extends ComponentProps<"input"> {
   onValueChange: (val: string) => void;
   onEnter?: () => void;
+}
+
+export interface CellProps {
+  cellData: any;
+  config: CellConfig;
+  render: (data: any, config: CellConfig) => ReactElement;
+  variant?: "HEADER" | "ROW_HEADER" | "COLUMN";
+  className?: string;
+}
+
+export interface SearchBlockProps {
+  query: string;
+  toggleAutoSuggestion: (state: "FOCUS" | "BLUR") => void;
+  onSearch: (val: string) => void;
+  onAutoSuggest: (val: string) => void;
+  clearSearch: () => void;
 }
