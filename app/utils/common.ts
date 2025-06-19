@@ -70,3 +70,5 @@ export const creditsFormatter = (value: string | null) =>
         value
       )} credits`
     : value;
+export const isPositiveFinite = (value) =>
+  Number.isFinite(Number(value)) && Number(value) > 0;

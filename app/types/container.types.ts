@@ -32,3 +32,9 @@ export interface QueriesContainerProps {
   LoaderElement?: ReactElement;
   render: (data: any, isLoading: boolean) => ReactElement;
 }
+
+export interface AutoSuggestContainerProps {
+  autoSuggestions: string[];
+  showSuggestions: boolean;
+  onSingleSearch: (arg: string) => void;
+}
