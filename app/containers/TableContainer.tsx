@@ -14,22 +14,27 @@ const TableContainer = <DataType extends any[]>({
   data,
   description,
   cellRender,
-  cellConfigs,
   onRowClick,
+  cellConfigs = [],
   variant = "STICKY",
 }: TableContainerProps<DataType>) => {
   const classes = tableVariant[variant];
-  const headers = cellConfigs.map((value) => value?.header);
+  const headers = arrayCheck(cellConfigs)
+    ? cellConfigs?.map((value) => value?.header)
+    : [];
   return data && arrayCheck(data) ? (
     <div className="overflow-x-auto">
       <table className={`w-full ${classes.table}`}>
-        {description ? <caption>{description}</caption> : null}
+        {description ? (
+          <caption className="invisible">{description}</caption>
+        ) : null}
         <thead>
           <tr className="bg-linear-to-r from-orange-600 to-orange-500 shadow-sm">
             {headers?.map((header) => (
               <Cell
-                variant={"HEADER"}
+                variant="HEADER"
                 cellData={header}
+                config={{}}
                 key={header}
                 className={`px-2 py-2 text-left text-sm md:text-base  whitespace-nowrap ${classes.header}`}
               />
@@ -46,6 +51,7 @@ const TableContainer = <DataType extends any[]>({
               {cellConfigs?.map((config, cIndex) => (
                 <Cell
                   cellData={cellData}
+                  variant={cIndex === 0 ? "ROW_HEADER" : "COLUMN"}
                   className={`px-2 py-1 text-left whitespace-nowrap text-sm md:text-base md:py-2 ${classes.cell}`}
                   key={`${index}_${cIndex}`}
                   config={config}

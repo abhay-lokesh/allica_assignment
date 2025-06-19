@@ -11,4 +11,6 @@ export const ACCESIBILITY_TEXT = {
   LAST: "Click here to obtain the last page of characters",
   AUTOSUGGEST: "This is a list of autosuggestions for the query ",
   AUTOSUGGEST_ITEM: "Click to select ",
+  CHARACTER_TABLE_DESCRIPTION:
+    "This table represents all the star wars characters for the current page",
 };
