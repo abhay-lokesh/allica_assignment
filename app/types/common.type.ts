@@ -6,7 +6,10 @@ import type { CellConfig } from "./container.types";
 export type Primitive = string | number | boolean;
 export type Sizes = "XS" | "SM" | "MD" | "LG";
 export type Orientation = "ROW" | "COLUMN";
-
+export type CellRender = (
+  data: any,
+  config: CellConfig | {}
+) => ReactElement | null;
 interface IconProps {
   iconConfig?: { icon: IconName; label: string };
   iconPosition?: any;
@@ -56,8 +59,8 @@ export interface InputProps extends ComponentProps<"input"> {
 
 export interface CellProps {
   cellData: any;
-  config: CellConfig;
-  render: (data: any, config: CellConfig) => ReactElement;
+  render?: CellRender;
+  config: CellConfig | {};
   variant?: "HEADER" | "ROW_HEADER" | "COLUMN";
   className?: string;
 }

@@ -1,5 +1,7 @@
 import type { ComponentProps, ReactElement } from "react";
+import type { CellRender } from "./common.type";
 
+type QueryRender = (data: any, isLoading: boolean) => ReactElement | null;
 export interface SectionContainerProps extends ComponentProps<"section"> {
   header?: string;
   variant?: "SECTION" | "PAGE";
@@ -14,7 +16,7 @@ export type CellConfig = {
 export interface TableContainerProps<DataType> extends ComponentProps<"table"> {
   data: DataType;
   description: string;
-  cellRender: (args: any) => ReactElement;
+  cellRender: CellRender;
   cellConfigs: CellConfig[];
   onRowClick: (arg: DataType) => void;
   variant: "STICKY" | "NORMAL";
@@ -24,13 +26,13 @@ export interface QueryContainerProps {
   url: string;
   keys: string[];
   LoaderElement?: ReactElement;
-  render: (data: any, isLoading: boolean) => ReactElement;
+  render: QueryRender;
 }
 export interface QueriesContainerProps {
   urls: string[];
   key: string;
   LoaderElement?: ReactElement;
-  render: (data: any, isLoading: boolean) => ReactElement;
+  render: QueryRender;
 }
 
 export interface AutoSuggestContainerProps {
