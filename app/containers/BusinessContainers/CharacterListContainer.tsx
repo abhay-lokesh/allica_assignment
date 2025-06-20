@@ -27,7 +27,7 @@ const CharacterListContainer = ({ configs }: CharacterListContainerProps) => {
       names = characters;
     } else if (
       arrayCheck(characterNames) &&
-      !(currentPage * pageSize > characterNames.length)
+      !(currentPage * pageSize >= characterNames.length)
     ) {
       const start = currentPage * pageSize;
       names = characterNames.slice(start, start + pageSize);

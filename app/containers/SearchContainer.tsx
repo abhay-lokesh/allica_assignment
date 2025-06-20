@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router";
 import SearchBlock from "~/components/SearchBlock";
 import AutoSuggestContainer from "./AutoSuggestContainer";
 import { LABEL } from "~/constants/label.constant";
+import Text from "~/components/Text";
 
 const SearchContainer = () => {
   const { onRowClick } = useCharacterNavigate();
@@ -73,7 +74,11 @@ const SearchContainer = () => {
   };
 
   return (
-    <SectionContainer className="flex justify-center bg-orange-100 px-4 pt-4 w-full h-[20vh] sm:h-[25vh]">
+    <SectionContainer className="flex justify-center bg-zinc-200 px-4 pt-4 w-full h-[20vh] sm:h-[25vh]">
+      <Text
+        className="pb-1 sm:pb-2 text-sm sm:text-2xl"
+        value="Explore the galaxy"
+      />
       <div className="absolute">
         <SearchBlock
           query={searchParams.get("query") || ""}

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import Loader from "~/components/Loader";
 import type { QueryContainerProps } from "~/types/container.types";
 import { fetchData } from "~/utils";
 
@@ -15,7 +16,7 @@ const QueryContainer = ({
   });
   let isLoading = status === "pending" && fetchStatus === "fetching";
   return isLoading
-    ? LoaderElement || <p>Loading...</p>
+    ? LoaderElement || <Loader variant="SINGLE" />
     : render(data, isLoading);
 };
 

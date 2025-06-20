@@ -4,8 +4,10 @@ import { useBoundStore } from "~/store/base.store";
 
 const PaingationContainer = () => {
   const paginateSimple = useBoundStore((state) => state.paginateSimple);
+
   const currentPage = useBoundStore((state) => state.currentPage);
   const pages = useBoundStore((state) => state.pages);
+
   return pages > 1 ? (
     <div className="flex justify-center sm:justify-start items-center gap-1 w-full">
       <Button
@@ -29,7 +31,7 @@ const PaingationContainer = () => {
       />
 
       <span className="text-sm">
-        {currentPage + 1} of {pages}
+        {currentPage >= pages ? currentPage : currentPage + 1} of {pages}
       </span>
       <Button
         iconConfig={{
@@ -37,7 +39,7 @@ const PaingationContainer = () => {
           label: ACCESIBILITY_TEXT.NEXT,
         }}
         styles={{ variant: "ICON", size: "SM" }}
-        state={currentPage === pages - 1 ? "DISABLED" : null}
+        state={currentPage >= pages - 1 ? "DISABLED" : null}
         onButtonClick={() => paginateSimple("NEXT")}
       />
       <Button
@@ -46,7 +48,7 @@ const PaingationContainer = () => {
           label: ACCESIBILITY_TEXT.LAST,
         }}
         className="hidden sm:inline"
-        state={currentPage === pages - 1 ? "DISABLED" : null}
+        state={currentPage >= pages - 1 ? "DISABLED" : null}
         styles={{ variant: "ICON", size: "SM" }}
         onButtonClick={() => paginateSimple("LAST")}
       />

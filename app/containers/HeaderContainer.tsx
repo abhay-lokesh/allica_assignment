@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 
 const HeaderContainer = () => {
   return (
-    <header className="top-0 z-20 sticky flex justify-between bg-linear-to-r from-orange-600 to-orange-500 shadow-md px-4 py-2 border-b-amber-700 w-full text-white">
+    <header className="top-0 z-20 sticky flex justify-between bg-linear-to-r from-zinc-950 to-zinc-700 shadow-md px-4 py-2 border-b-amber-700 w-full text-white">
       <nav className="flex justify-between sm:justify-start gap-2 w-full transition-all">
         <h1 className="flex items-center font-mono font-bold text-lg sm:text-xl">
           <NavLink to={"/"} viewTransition className="pr-2">

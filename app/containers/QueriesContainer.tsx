@@ -1,4 +1,5 @@
 import { useQueries } from "@tanstack/react-query";
+import Loader from "~/components/Loader";
 import type { QueriesContainerProps } from "~/types/container.types";
 import { fetchData } from "~/utils";
 
@@ -23,7 +24,7 @@ const QueriesContainer = ({
   );
 
   return isLoading
-    ? LoaderElement || <p>Loading...</p>
+    ? LoaderElement || <Loader variant="SECTION" />
     : render(results, isLoading);
 };
 
