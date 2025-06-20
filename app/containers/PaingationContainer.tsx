@@ -7,14 +7,14 @@ const PaingationContainer = () => {
   const currentPage = useBoundStore((state) => state.currentPage);
   const pages = useBoundStore((state) => state.pages);
   return pages > 1 ? (
-    <div className="flex items-center gap-1 w-full">
+    <div className="flex justify-center sm:justify-start items-center gap-1 w-full">
       <Button
         iconConfig={{
           icon: "chevrons-left",
           label: ACCESIBILITY_TEXT.FIRST,
         }}
         className="hidden sm:inline"
-        styles={{ variant: "ICON", size: "XS" }}
+        styles={{ variant: "ICON", size: "SM" }}
         state={currentPage === 1 ? "DISABLED" : null}
         onButtonClick={() => paginateSimple("FIRST")}
       />
@@ -23,8 +23,7 @@ const PaingationContainer = () => {
           icon: "chevron-left",
           label: ACCESIBILITY_TEXT.PREV,
         }}
-        className="hidden sm:inline"
-        styles={{ variant: "ICON", size: "XS" }}
+        styles={{ variant: "ICON", size: "SM" }}
         state={currentPage === 1 ? "DISABLED" : null}
         onButtonClick={() => paginateSimple("PREV")}
       />
@@ -37,8 +36,7 @@ const PaingationContainer = () => {
           icon: "chevron-right",
           label: ACCESIBILITY_TEXT.NEXT,
         }}
-        className="hidden sm:inline"
-        styles={{ variant: "ICON", size: "XS" }}
+        styles={{ variant: "ICON", size: "SM" }}
         state={currentPage === pages ? "DISABLED" : null}
         onButtonClick={() => paginateSimple("NEXT")}
       />
@@ -49,7 +47,7 @@ const PaingationContainer = () => {
         }}
         className="hidden sm:inline"
         state={currentPage === pages ? "DISABLED" : null}
-        styles={{ variant: "ICON", size: "XS" }}
+        styles={{ variant: "ICON", size: "SM" }}
         onButtonClick={() => paginateSimple("LAST")}
       />
     </div>

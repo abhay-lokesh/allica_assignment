@@ -4,6 +4,7 @@ import type { HomeWorldDisplay } from "~/types/character.type";
 import { extractHomeWorld } from "~/services/character.service";
 import Text from "~/components/Text";
 import type { TextProps } from "~/types/common.type";
+import { nullCheck } from "~/utils";
 
 interface HomeWorldContainerProps {
   prop: string;
@@ -25,7 +26,7 @@ const HomeWorldContainer = ({
           data,
           extractHomeWorld
         );
-        return homeworld ? (
+        return !nullCheck(homeworld) && typeof homeworld === "object" ? (
           <Text {...textAttributes} value={homeworld?.name || ""} />
         ) : null;
       }}
