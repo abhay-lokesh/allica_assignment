@@ -9,4 +9,6 @@ export const LABEL = {
   DIRECTOR: "Director :",
   MANUFACTURED_BY: "Manufactured By: ",
   GENDER: "Gender",
+  NO_SEARCH_RESULTS:
+    "No Search results found for the keyword. Please try another keyword.",
 };
