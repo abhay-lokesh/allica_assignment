@@ -17,7 +17,7 @@ const sizeMap = {
 };
 
 const iconSizeMap = {
-  XS: "text-xs sm:text-sm",
+  XS: "text-md sm:text-lg",
   SM: "text-lg sm:text-2xl",
   MD: "text-2xl sm:text-3xl",
   LG: "text-3xl sm:text-4xl",
@@ -48,7 +48,7 @@ const Button = ({
       type="button"
       aria-label={variant === "ICON" ? label : text}
       disabled={state === "DISABLED"}
-      className={`group transition-all cursor-pointer enabled:hover:bg-orange-50 disabled:pointer-none disabled:bg-black/15 disabled:border-slate-500 disabled:text-slate-500 ${
+      className={`group transition-all cursor-pointer enabled:hover:bg-orange-100 disabled:pointer-none disabled:bg-black/15 disabled:border-slate-500 disabled:text-slate-500  outline-none ${
         className || ""
       }
       ${variantMap[variant]}

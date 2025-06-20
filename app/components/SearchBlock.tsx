@@ -50,7 +50,7 @@ const SearchBlock = ({
         onValueChange={onSearchQuery}
         onFocus={onSearchFocus}
         className={
-          "bg-orange-50 px-4 py-1 sm:py-2 min-w-7/12 sm:min-w-md md:min-w-2xl lg:min-w-4xl border-2 border-orange-200 transition-all rounded-full outline-none focus:border-orange-300 focus-within:border-orange-300 focus-visible:border-orange-300"
+          "bg-zinc-50 px-4 py-1 sm:py-2 min-w-7/12 sm:min-w-md md:min-w-2xl lg:min-w-4xl border-2 border-zinc-400 transition-all rounded-full outline-none focus:border-orange-300 focus-within:border-orange-300 focus-visible:border-orange-300"
         }
       />
       <Button
