@@ -126,42 +126,52 @@ const Character = () => {
               />
             ) : null}
           </SectionContainer>
-          <SectionContainer header="Physical Attributes">
-            <FlexBox className="items-start md:items-center gap-5">
-              {characterData?.mass?.toLocaleLowerCase() !== "unknown" ? (
+          <SectionContainer className="flex sm:flex-row flex-col gap-2 sm:gap-6">
+            <SectionContainer className="flex-1/2" header="Physical Attributes">
+              <FlexBox className="items-start md:items-center gap-5">
+                {characterData?.mass?.toLocaleLowerCase() !== "unknown" ? (
+                  <Combo
+                    value={characterData?.mass}
+                    label={LABEL.WEIGHT}
+                    append="Kg"
+                  />
+                ) : null}
                 <Combo
-                  value={characterData?.mass}
-                  label={LABEL.WEIGHT}
-                  append="Kg"
+                  value={characterData?.hair_color}
+                  label={LABEL.HAIR_COLOR}
                 />
-              ) : null}
-              <Combo
-                value={characterData?.hair_color}
-                label={LABEL.HAIR_COLOR}
-              />
-              <Combo value={characterData?.eye_color} label={LABEL.EYE_COLOR} />
-            </FlexBox>
-            <FlexBox className="gap-4 mt-2">
-              {characterData?.height && characterData?.name ? (
-                <CharacterUpdate
-                  append="cm"
-                  format="number"
-                  label={LABEL.HEIGHT}
-                  data={characterData?.height}
-                  prop={characterData?.name}
-                  param="height"
+                <Combo
+                  value={characterData?.eye_color}
+                  label={LABEL.EYE_COLOR}
                 />
-              ) : null}
-              {characterData?.gender && characterData?.name ? (
-                <CharacterUpdate
-                  format="string"
-                  label={LABEL.GENDER}
-                  data={characterData?.gender}
-                  prop={characterData?.name}
-                  param="gender"
-                />
-              ) : null}
-            </FlexBox>
+              </FlexBox>
+            </SectionContainer>
+            <SectionContainer
+              className="flex-1/2"
+              header="Editable Physical Attributes"
+            >
+              <FlexBox className="gap-4 mt-2">
+                {characterData?.height && characterData?.name ? (
+                  <CharacterUpdate
+                    append="cm"
+                    format="number"
+                    label={LABEL.HEIGHT}
+                    data={characterData?.height}
+                    prop={characterData?.name}
+                    param="height"
+                  />
+                ) : null}
+                {characterData?.gender && characterData?.name ? (
+                  <CharacterUpdate
+                    format="string"
+                    label={LABEL.GENDER}
+                    data={characterData?.gender}
+                    prop={characterData?.name}
+                    param="gender"
+                  />
+                ) : null}
+              </FlexBox>
+            </SectionContainer>
           </SectionContainer>
           {characterData?.starships && arrayCheck(characterData?.starships) ? (
             <QueriesContainer
@@ -178,7 +188,7 @@ const Character = () => {
                       {starships?.map((item, index) => (
                         <li className="flex pb-2">
                           <Text
-                            className="text-md"
+                            className="text-md sm:text-lg"
                             value={index + 1}
                             append={". "}
                           />
@@ -187,8 +197,11 @@ const Character = () => {
                             key={item?.url}
                             orientation="COLUMN"
                           >
-                            <Text className="text-md" value={item?.name} />
-                            <FlexBox className="gap-1 sm:gap-2 text-sm">
+                            <Text
+                              className="text-md sm:text-lg"
+                              value={item?.name}
+                            />
+                            <FlexBox className="gap-1 sm:gap-2 sm:text-md text-sm">
                               <Text
                                 className="italic"
                                 value={item?.manufacturer}
@@ -226,14 +239,17 @@ const Character = () => {
                       {films?.map((item, index) => (
                         <li key={item?.url} className="flex pb-2">
                           <Text
-                            className="text-md"
+                            className="text-md sm:text-lg"
                             value={index + 1}
                             append={". "}
                           />
                           <FlexBox usage="STRUCTURED" orientation="COLUMN">
-                            <Text className="text-md" value={item?.title} />
                             <Text
-                              className="text-xs italic"
+                              className="text-md sm:text-lg"
+                              value={item?.title}
+                            />
+                            <Text
+                              className="text-xs sm:text-sm italic"
                               prepend={LABEL.DIRECTOR}
                               value={item?.director}
                             />

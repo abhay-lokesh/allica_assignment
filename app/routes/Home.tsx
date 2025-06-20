@@ -18,9 +18,9 @@ import type { Route } from "./+types/Home";
 const CELL_CONFIGS: CellConfig[] = [
   { key: "name", type: "sync", format: "string", header: "name" },
   { key: "gender", type: "sync", format: "string", header: "gender" },
-  { key: "homeworld", type: "query_async", format: "string", header: "home" },
+  { key: "homeworld", type: "query_async", format: "string", header: "Planet" },
 ];
-export function meta({}: Route.MetaArgs) {
+export function meta({}) {
   return [
     { title: "Star Wars - May the force be with you" },
     {

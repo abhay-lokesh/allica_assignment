@@ -22,7 +22,7 @@ const CharacterUpdate = ({
   const onValueChange = (value: string) => {
     if (format === "number" && isPositiveFinite(value)) {
       setValue(value);
-    } else if (format === "string" && value !== "") {
+    } else if (format === "string") {
       setValue(value);
     }
   };
@@ -36,13 +36,18 @@ const CharacterUpdate = ({
   };
 
   return (
-    <FlexBox responsive="NONE" orientation="COLUMN">
-      <Text className="text-xs" value={label} />
+    <FlexBox
+      className="flex-1/2 bg-black-100/25"
+      responsive="NONE"
+      orientation="COLUMN"
+    >
+      <Text className="text-xs sm:text-sm" value={label} />
       {toggleEditable ? (
-        <FlexBox responsive="NONE" className="gap-1">
+        <FlexBox responsive="NONE" className="gap-2">
           <Input
             onValueChange={onValueChange}
-            className="mt-0.5 px-1 py-0.5 border-2 border-orange-400 rounded-3xl outline-none w-20 text-xs"
+            maxLength={format === "number" ? 3 : 15}
+            className="mt-1 px-2 py-0.5 border-2 border-orange-400 rounded-md outline-none w-20 text-sm"
             value={value}
           />
           <Button
@@ -53,18 +58,22 @@ const CharacterUpdate = ({
             styles={{ variant: "ICON", size: "XS" }}
             className={"text-orange-600"}
             onButtonClick={updateValue}
-            iconWidth={"THIN"}
+            iconWidth={"NORMAL"}
           />
         </FlexBox>
       ) : (
-        <FlexBox responsive="NONE" className="gap-1">
-          <Text className="text-sm" value={data} append={append} />
+        <FlexBox responsive="NONE" className="gap-2">
+          <Text
+            className="text-md sm:text-lg capitalize"
+            value={data}
+            append={append}
+          />
           <Button
             iconConfig={{ icon: "pen", label: ACCESIBILITY_TEXT.CHANGE_HEIGHT }}
             styles={{ variant: "ICON", size: "XS" }}
             className={"text-orange-600"}
             onButtonClick={() => setToggleEditable(!toggleEditable)}
-            iconWidth={"BOLD"}
+            iconWidth={"NORMAL"}
           />
         </FlexBox>
       )}
