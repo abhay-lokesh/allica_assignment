@@ -6,7 +6,7 @@ const HeaderContainer = () => {
     <header className="top-0 z-20 sticky flex justify-between bg-linear-to-r from-orange-600 to-orange-500 shadow-md px-4 py-2 border-b-amber-700 w-full text-white">
       <nav className="flex justify-between sm:justify-start gap-2 w-full transition-all">
         <h1 className="flex items-center font-mono font-bold text-lg sm:text-xl">
-          <NavLink to={"/"} className="pr-2">
+          <NavLink to={"/"} viewTransition className="pr-2">
             Star Wars
           </NavLink>
         </h1>
@@ -19,6 +19,7 @@ const HeaderContainer = () => {
         {/* <div className="flex justify-items-center"> */}
         <NavLink
           to="/favorite"
+          viewTransition
           className="flex items-center gap-2 hover:opacity-85 focus:opacity-85 px-1 sm:px-3 py-1 sm:py-1 text-base sm:text-lg cursor-pointer"
         >
           <span className="hidden sm:inline font-medium">Favorite</span>

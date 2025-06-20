@@ -1,12 +1,17 @@
 import type { IconName } from "lucide-react/dynamic";
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactElement } from "react";
+import type { CharacterDisplay } from "./character.type";
+import type { CellConfig } from "./container.types";
 
 export type Primitive = string | number | boolean;
-export type Sizes = "SM" | "MD" | "LG";
+export type Sizes = "XS" | "SM" | "MD" | "LG";
 export type Orientation = "ROW" | "COLUMN";
-
+export type CellRender = (
+  data: any,
+  config: CellConfig | {}
+) => ReactElement | null;
 interface IconProps {
-  icon?: IconName;
+  iconConfig?: { icon: IconName; label: string };
   iconPosition?: any;
   iconWidth?: "THIN" | "NORMAL" | "BOLD";
 }
@@ -25,7 +30,45 @@ export interface FlexboxProps extends ComponentProps<"div"> {
   responsive?: "ADAPTIVE" | "NONE";
 }
 export interface ButtonProps extends ComponentProps<"button">, IconProps {
+  onButtonClick: () => void;
   text?: string;
-  variant?: "OUTLINE" | "FILLED" | "GHOST";
-  onButtonClick?: () => void;
+  state?: "DISABLED" | "LOADING" | null;
+  styles?: { variant?: "OUTLINE" | "FILLED" | "GHOST" | "ICON"; size?: Sizes };
+}
+
+export interface ComboProps {
+  label: string;
+  value?: string;
+  append?: string;
+  prepend?: string;
+}
+
+export interface CharacterUpdateProps {
+  prop: string;
+  param: keyof CharacterDisplay;
+  data: string | number;
+  format: "string" | "number";
+  label: string;
+  append?: string;
+}
+
+export interface InputProps extends ComponentProps<"input"> {
+  onValueChange: (val: string) => void;
+  onEnter?: () => void;
+}
+
+export interface CellProps {
+  cellData: any;
+  render?: CellRender;
+  config: CellConfig | {};
+  variant?: "HEADER" | "ROW_HEADER" | "COLUMN";
+  className?: string;
+}
+
+export interface SearchBlockProps {
+  query: string;
+  toggleAutoSuggestion: (state: "FOCUS" | "BLUR") => void;
+  onSearch: (val: string) => void;
+  onAutoSuggest: (val: string) => void;
+  clearSearch: () => void;
 }

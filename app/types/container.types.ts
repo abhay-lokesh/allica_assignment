@@ -1,33 +1,47 @@
 import type { ComponentProps, ReactElement } from "react";
+import type { CellRender } from "./common.type";
 
+type QueryRender = (data: any, isLoading: boolean) => ReactElement | null;
 export interface SectionContainerProps extends ComponentProps<"section"> {
   header?: string;
+  variant?: "SECTION" | "PAGE";
 }
 
 export type CellConfig = {
   key: string;
-  type: "sync" | "async" | "quer_async" | "parent_fn";
+  type: "sync" | "async" | "query_async" | "button";
   format: "string" | "number" | "date" | "currency";
   header: string;
+  hideMobile?: boolean;
 };
-export interface TableContainerProps<DataType> extends ComponentProps<"table"> {
-  data: DataType;
-  description: string;
-  cellRender: (args: any) => ReactElement;
+export interface TableContainerProps extends ComponentProps<"table"> {
+  data: any[];
+  cellRender: CellRender;
   cellConfigs: CellConfig[];
-  onRowClick: (arg: CellConfig) => void;
-  variant: "STICKY" | "NORMAL";
+  onRowClick: (arg: any) => void;
+  description?: string;
+  variant?: "STICKY" | "NORMAL";
 }
 
 export interface QueryContainerProps {
   url: string;
-  LoaderElement: ReactElement;
   keys: string[];
-  render: (data: any, isLoading: boolean) => ReactElement;
+  LoaderElement?: ReactElement;
+  render: QueryRender;
 }
 export interface QueriesContainerProps {
   urls: string[];
   key: string;
-  render: (data: any, isLoading: boolean) => ReactElement;
-  LoaderElement: ReactElement;
+  LoaderElement?: ReactElement;
+  render: QueryRender;
+}
+
+export interface AutoSuggestContainerProps {
+  autoSuggestions: string[];
+  showSuggestions: boolean;
+  onSingleSearch: (arg: string) => void;
+}
+
+export interface CharacterListContainerProps {
+  configs: CellConfig[];
 }
