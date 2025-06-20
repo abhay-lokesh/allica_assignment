@@ -15,7 +15,7 @@ const PaingationContainer = () => {
         }}
         className="hidden sm:inline"
         styles={{ variant: "ICON", size: "SM" }}
-        state={currentPage === 1 ? "DISABLED" : null}
+        state={currentPage === 0 ? "DISABLED" : null}
         onButtonClick={() => paginateSimple("FIRST")}
       />
       <Button
@@ -24,12 +24,12 @@ const PaingationContainer = () => {
           label: ACCESIBILITY_TEXT.PREV,
         }}
         styles={{ variant: "ICON", size: "SM" }}
-        state={currentPage === 1 ? "DISABLED" : null}
+        state={currentPage === 0 ? "DISABLED" : null}
         onButtonClick={() => paginateSimple("PREV")}
       />
 
       <span className="text-sm">
-        {currentPage} of {pages}
+        {currentPage + 1} of {pages}
       </span>
       <Button
         iconConfig={{
@@ -37,7 +37,7 @@ const PaingationContainer = () => {
           label: ACCESIBILITY_TEXT.NEXT,
         }}
         styles={{ variant: "ICON", size: "SM" }}
-        state={currentPage === pages ? "DISABLED" : null}
+        state={currentPage === pages - 1 ? "DISABLED" : null}
         onButtonClick={() => paginateSimple("NEXT")}
       />
       <Button
@@ -46,7 +46,7 @@ const PaingationContainer = () => {
           label: ACCESIBILITY_TEXT.LAST,
         }}
         className="hidden sm:inline"
-        state={currentPage === pages ? "DISABLED" : null}
+        state={currentPage === pages - 1 ? "DISABLED" : null}
         styles={{ variant: "ICON", size: "SM" }}
         onButtonClick={() => paginateSimple("LAST")}
       />

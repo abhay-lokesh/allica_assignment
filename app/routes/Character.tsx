@@ -81,7 +81,6 @@ const Character = () => {
   const setCharacterData = useBoundStore((state) => state.setCharacterData);
 
   useEffect(() => {
-    console.log("RESPONSE", response);
     if (!nullCheck(response)) {
       const characterData = extractCharacterData(response);
       if (characterData) {
@@ -89,7 +88,6 @@ const Character = () => {
       }
     }
   }, [response]);
-  console.log("CHARACTER", characterData);
   useEffect(() => {
     () => {
       clearCharacterData();

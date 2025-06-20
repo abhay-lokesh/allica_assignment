@@ -8,7 +8,6 @@ export const searchService = (() => {
 
   let searchKeyword = (keyword: string) => {
     let res: string[] = [];
-    console.log("TRIE", trie);
     if (trie) {
       res = trie.search(keyword);
     }

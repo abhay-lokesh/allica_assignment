@@ -67,6 +67,7 @@ const SearchContainer = () => {
 
   const clearSearch = () => {
     if (searchParams.get("query")) {
+      filterCharacters([]);
       setSearchParams({}, { replace: true });
     }
   };
