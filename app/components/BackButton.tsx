@@ -10,7 +10,7 @@ const BackButton = () => {
   };
   return (
     <Button
-      styles={{ variant: "ICON", size: "XS" }}
+      styles={{ variant: "ICON", size: "LG" }}
       iconConfig={{
         icon: "circle-chevron-left",
         label: ACCESIBILITY_TEXT.BACK_NAVIGATE,

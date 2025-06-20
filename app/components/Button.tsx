@@ -15,6 +15,13 @@ const sizeMap = {
   MD: "px-5 py-0.5 text-sm",
   LG: "px-7 py-1 text-base",
 };
+
+const iconSizeMap = {
+  XS: "text-xs sm:text-sm",
+  SM: "text-lg sm:text-2xl",
+  MD: "text-2xl sm:text-3xl",
+  LG: "text-3xl sm:text-4xl",
+};
 const Button = ({
   text,
   iconConfig,
@@ -45,13 +52,14 @@ const Button = ({
         className || ""
       }
       ${variantMap[variant]}
-      ${sizeMap[size]}
+      ${variant === "ICON" ? iconSizeMap[size] : sizeMap[size]}
     ${variant === "ICON" ? "px-1 py-1 rounded-full" : ""}`}
       onClick={handleClick}
     >
       {iconPosition === "LEFT" && icon ? (
         <DynamicIcon
           name={icon}
+          size={"1em"}
           className="enabled:group-hover:stroke-orange-600"
           strokeWidth={IconWidth[iconWidth || "NORMAL"]}
         />
@@ -60,6 +68,7 @@ const Button = ({
       {icon && !text ? (
         <DynamicIcon
           name={icon}
+          size={"1em"}
           className="enabled:group-hover:stroke-orange-600"
           strokeWidth={IconWidth[iconWidth || "NORMAL"]}
         />
@@ -67,6 +76,7 @@ const Button = ({
       {iconPosition === "RIGHT" && icon ? (
         <DynamicIcon
           name={icon}
+          size={"1em"}
           className="enabled:group-hover:stroke-orange-600"
           strokeWidth={IconWidth[iconWidth || "NORMAL"]}
         />

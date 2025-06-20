@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import FlexBox from "../FlexBox";
 import Text from "../Text";
 import Button from "../Button";
@@ -9,7 +9,6 @@ import type { CharacterUpdateProps } from "~/types/common.type";
 import { ACCESIBILITY_TEXT } from "~/constants/accessibility.constant";
 
 const CharacterUpdate = ({
-  prop,
   param,
   data,
   append,
@@ -19,48 +18,55 @@ const CharacterUpdate = ({
   const updateCharacter = useBoundStore((state) => state.updateCharacter);
   const [toggleEditable, setToggleEditable] = useState(false);
   const [value, setValue] = useState("");
-  console.log("DATA", data);
 
   const onValueChange = (value: string) => {
     if (format === "number" && isPositiveFinite(value)) {
+      setValue(value);
+    } else if (format === "string" && value !== "") {
       setValue(value);
     }
   };
 
   const updateValue = () => {
-    updateCharacter(value || "", prop, param);
-    setValue("");
+    if (value) {
+      updateCharacter(value || "", param);
+      setValue("");
+    }
     setToggleEditable(false);
   };
 
   return (
-    <FlexBox>
-      <Text className="text-sm" value={label} />
+    <FlexBox responsive="NONE" orientation="COLUMN">
+      <Text className="text-xs" value={label} />
       {toggleEditable ? (
-        <Fragment>
-          <Input onValueChange={onValueChange} value={value} />
+        <FlexBox responsive="NONE" className="gap-1">
+          <Input
+            onValueChange={onValueChange}
+            className="mt-0.5 px-1 py-0.5 border-2 border-orange-400 rounded-3xl outline-none w-20 text-xs"
+            value={value}
+          />
           <Button
             iconConfig={{
               icon: "check",
               label: ACCESIBILITY_TEXT.CHANGE_HEIGHT,
             }}
-            styles={{ variant: "ICON", size: "SM" }}
-            className={`"text-orange-600"`}
+            styles={{ variant: "ICON", size: "XS" }}
+            className={"text-orange-600"}
             onButtonClick={updateValue}
             iconWidth={"THIN"}
           />
-        </Fragment>
+        </FlexBox>
       ) : (
-        <Fragment>
+        <FlexBox responsive="NONE" className="gap-1">
           <Text className="text-sm" value={data} append={append} />
           <Button
             iconConfig={{ icon: "pen", label: ACCESIBILITY_TEXT.CHANGE_HEIGHT }}
-            styles={{ variant: "ICON", size: "SM" }}
-            className={`"text-orange-600"`}
+            styles={{ variant: "ICON", size: "XS" }}
+            className={"text-orange-600"}
             onButtonClick={() => setToggleEditable(!toggleEditable)}
             iconWidth={"BOLD"}
           />
-        </Fragment>
+        </FlexBox>
       )}
     </FlexBox>
   );
