@@ -5,8 +5,6 @@ const Input = ({
   className,
   defaultValue,
   value,
-  onFocus,
-  onBlur,
   onValueChange,
   onEnter,
   ...props
@@ -21,11 +19,13 @@ const Input = ({
     }
   };
 
-  const handleEnter = (e: React.KeyboardEvent) => {
+  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e && e.key === "Enter") {
       e.stopPropagation();
       if (onEnter) {
         onEnter();
+      } else if (onValueChange) {
+        onValueChange((e.target as HTMLInputElement).value);
       }
     }
   };
@@ -36,12 +36,10 @@ const Input = ({
       placeholder={placeholder}
       className={className || ""}
       defaultValue={defaultValue}
-      value={value}
+      value={value ? value : defaultValue}
       {...props}
       onChange={handleChange}
       onKeyUp={handleEnter}
-      onFocus={onFocus}
-      onBlur={onBlur}
     />
   );
 };
