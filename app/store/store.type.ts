@@ -6,12 +6,11 @@ export interface FavoriteSlice {
 }
 
 export interface CharacterSlice {
-  characters: CharacterDisplay[];
+  characters: string[];
   characterNames: string[];
   characterMap: { [key: string]: CharacterDisplay };
   characterData: CharacterDisplay | null;
   initData: (data: CharacterDisplay[], pageSize: number) => void;
-  paginateData: (page: number, pageSize: number) => void;
   filterCharacters: (keys: string[]) => void;
   setCharacterData: (data: CharacterDisplay) => void;
   clearCharacterData: () => void;
@@ -21,3 +20,5 @@ export interface CharacterSlice {
   pageSize: number;
   paginateSimple: (order: "LAST" | "FIRST" | "NEXT" | "PREV") => void;
 }
+
+// paginateData: (page: number, pageSize: number) => void;
