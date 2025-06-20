@@ -52,13 +52,12 @@ export default function Home() {
   const [searchParams] = useSearchParams();
 
   const initData = useBoundStore((state) => state.initData);
+
   useEffect(() => {
     if (response && !(searchParams && searchParams.get("query"))) {
       initData(response, 10);
     }
   }, [response]);
-
-  console.log("RE-RENDERING");
 
   return (
     <>
@@ -78,7 +77,6 @@ export default function Home() {
 }
 export function ErrorBoundary() {
   const error = useRouteError();
-  console.log("ERROR", error, isRouteErrorResponse(error));
   if (isRouteErrorResponse(error)) {
     let errorData: any = {};
 

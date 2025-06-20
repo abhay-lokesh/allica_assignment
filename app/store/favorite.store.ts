@@ -10,7 +10,6 @@ export const createFavoriteSlice: StateCreator<
   favorites: [],
   addRemoveFavorite: (key) =>
     set((state) => {
-      console.log("ToggleFavorite", state?.favorites, key);
       let modifiedFavorites = state?.favorites ? [...state.favorites] : [];
       if (state.favorites.includes(key)) {
         modifiedFavorites = modifiedFavorites.filter((item) => item !== key);

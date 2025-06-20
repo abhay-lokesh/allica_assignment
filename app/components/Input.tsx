@@ -35,8 +35,7 @@ const Input = ({
       type="text"
       placeholder={placeholder}
       className={className || ""}
-      defaultValue={defaultValue}
-      value={value ? value : defaultValue}
+      value={value}
       {...props}
       onChange={handleChange}
       onKeyUp={handleEnter}
