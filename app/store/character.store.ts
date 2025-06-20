@@ -12,9 +12,45 @@ export const createCharacterSlice: StateCreator<
   characters: [],
   characterMap: {},
   characterNames: [],
+  characterData: null,
   pages: 0,
   currentPage: 1,
   pageSize: 0,
+
+  initData: (initialData: CharacterDisplay[], pageSize = 10) =>
+    set((state) => {
+      console.log("INITIAL DATA", initialData);
+      let total = 0;
+      const modifiedObj = initialData.reduce(
+        (acc, character) => {
+          const { name } = character;
+          if (!nullCheck(name) && name) {
+            const caseName = name?.toLowerCase();
+            acc.characterMap[caseName] = character;
+            acc.characterNames.push(caseName);
+            total++;
+          }
+          return acc;
+        },
+        {
+          characterMap: {} as { [key: string]: CharacterDisplay },
+          characterNames: [] as string[],
+        }
+      );
+      const start = state.currentPage !== 1 ? state.currentPage * pageSize : 0;
+      return {
+        characters: initialData.slice(start, start + pageSize),
+        ...modifiedObj,
+        characterNames: [...modifiedObj.characterNames],
+        // This is done so that if the user lands onto the character page first and then init happens
+        characterMap: {
+          ...modifiedObj?.characterMap,
+          ...(state?.characterMap || {}),
+        },
+        pageSize,
+        pages: Math.floor(total / pageSize),
+      };
+    }),
   paginateSimple: (order) =>
     set((state) => {
       let page = 1;
@@ -38,35 +74,6 @@ export const createCharacterSlice: StateCreator<
       return {
         characters: [...paginatedCharacters],
         currentPage: page,
-      };
-    }),
-  initData: (initialData: CharacterDisplay[], pageSize = 10) =>
-    set((state) => {
-      console.log("INITIAL DATA", initialData);
-      let total = 0;
-      const modifiedObj = initialData.reduce(
-        (acc, character) => {
-          const { name } = character;
-          if (!nullCheck(name) && name) {
-            const caseName = name?.toLowerCase();
-            acc.characterMap[caseName] = character;
-            acc.characterNames.push(caseName);
-            total++;
-          }
-          return acc;
-        },
-        {
-          characterMap: {} as { [key: string]: CharacterDisplay },
-          characterNames: [] as string[],
-        }
-      );
-      console.log(state.currentPage, state.currentPage + pageSize);
-      const start = state.currentPage !== 1 ? state.currentPage * pageSize : 0;
-      return {
-        characters: initialData.slice(start, start + pageSize),
-        ...modifiedObj,
-        pageSize,
-        pages: Math.floor(total / pageSize),
       };
     }),
   paginateData: (page: number, pageSize = 10) =>
@@ -102,19 +109,38 @@ export const createCharacterSlice: StateCreator<
       };
     }),
 
-  updateCharacter: (
-    value: string,
-    key: string,
-    param: keyof CharacterDisplay
-  ) =>
+  updateCharacter: (value: string, param: keyof CharacterDisplay) =>
     set((state) => {
+      let characterData = { ...state.characterData };
       let characterMap = { ...state.characterMap };
-      if (characterMap[key]) {
-        const character = { ...characterMap[key], [param]: value };
-        characterMap = { ...characterMap, [key]: character };
+      const key = characterData?.name?.toLowerCase() as string;
+      console.log(
+        "UPDATE",
+        key,
+        value,
+        param,
+        state.characterMap,
+        state.characterMap[key],
+        characterData
+      );
+      if (characterData) {
+        characterData = { ...characterData, [param]: value };
+        characterMap = { ...characterMap, [key]: characterData };
       }
       return {
-        characterMap: { ...characterMap },
+        characterMap,
+        characterData,
       };
+    }),
+
+  clearCharacterData: () =>
+    set(() => {
+      return { characterData: null };
+    }),
+
+  setCharacterData: (data) =>
+    set(() => {
+      console.log("SETTING", data);
+      return { characterData: { ...data } };
     }),
 });
