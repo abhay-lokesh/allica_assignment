@@ -45,7 +45,7 @@ export const treeTraversal = (obj: any, keys: string | string[]) => {
 };
 
 export const arrayCheck = (arr: (Primitive | Object)[]) =>
-  Array.isArray(arr) && arr.length;
+  Array.isArray(arr) && arr.length > 0;
 
 export const extractValues = <SubData>(data, properties): SubData | null => {
   let res = null;

@@ -12,14 +12,15 @@ export type CellConfig = {
   type: "sync" | "async" | "query_async" | "button";
   format: "string" | "number" | "date" | "currency";
   header: string;
+  hideMobile?: boolean;
 };
-export interface TableContainerProps<DataType> extends ComponentProps<"table"> {
-  data: DataType;
-  description: string;
+export interface TableContainerProps extends ComponentProps<"table"> {
+  data: any[];
   cellRender: CellRender;
   cellConfigs: CellConfig[];
-  onRowClick: (arg: DataType) => void;
-  variant: "STICKY" | "NORMAL";
+  onRowClick: (arg: any) => void;
+  description?: string;
+  variant?: "STICKY" | "NORMAL";
 }
 
 export interface QueryContainerProps {
@@ -39,4 +40,8 @@ export interface AutoSuggestContainerProps {
   autoSuggestions: string[];
   showSuggestions: boolean;
   onSingleSearch: (arg: string) => void;
+}
+
+export interface CharacterListContainerProps {
+  configs: CellConfig[];
 }

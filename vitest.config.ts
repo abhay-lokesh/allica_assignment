@@ -1,11 +1,12 @@
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
+import path from "path";
 
 export default defineConfig({
   plugins: [react()],
   test: {
     environment: "jsdom",
-    setupFiles: ["./src/__tests__/setup.ts"],
+    setupFiles: ["./app/tests/setup.ts"],
     globals: true,
     css: true,
     coverage: {
@@ -14,14 +15,19 @@ export default defineConfig({
       reportsDirectory: "./coverage",
       exclude: [
         "node_modules/",
-        "src/__tests__/",
+        "app/tests/",
         "**/*.d.ts",
         "**/*.config.{js,ts}",
-        "src/main.tsx",
+        "app/main.tsx",
         "**/*.test.{js,ts,jsx,tsx}",
         "**/*.spec.{js,ts,jsx,tsx}",
         "coverage/**",
       ],
+    },
+  },
+  resolve: {
+    alias: {
+      "~": path.resolve(__dirname, "./app"),
     },
   },
 });
