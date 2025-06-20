@@ -9,16 +9,15 @@ export interface CharacterSlice {
   characters: CharacterDisplay[];
   characterNames: string[];
   characterMap: { [key: string]: CharacterDisplay };
+  characterData: CharacterDisplay | null;
   initData: (data: CharacterDisplay[], pageSize: number) => void;
   paginateData: (page: number, pageSize: number) => void;
   filterCharacters: (keys: string[]) => void;
+  setCharacterData: (data: CharacterDisplay) => void;
+  clearCharacterData: () => void;
+  updateCharacter: (value: string, param: keyof CharacterDisplay) => void;
   pages: number;
   currentPage: number;
   pageSize: number;
   paginateSimple: (order: "LAST" | "FIRST" | "NEXT" | "PREV") => void;
-  updateCharacter: (
-    value: string,
-    key: string,
-    param: keyof CharacterDisplay
-  ) => void;
 }

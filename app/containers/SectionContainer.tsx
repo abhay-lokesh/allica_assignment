@@ -1,6 +1,6 @@
 import type { SectionContainerProps } from "~/types/container.types";
 const sectionVariantMap = {
-  SECTION: "border-b-2 text-2xl mb-3 ",
+  SECTION: "border-b-2 text-xl sm:text-2xl mb-3 ",
   PAGE: "font-medium text-3xl capitalize first-letter:text-4xl",
 };
 const SectionContainer = ({
