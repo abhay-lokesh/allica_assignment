@@ -48,12 +48,12 @@ const Button = ({
       type="button"
       aria-label={variant === "ICON" ? label : text}
       disabled={state === "DISABLED"}
-      className={`group transition-all cursor-pointer enabled:hover:bg-orange-100 disabled:pointer-none disabled:bg-black/15 disabled:border-slate-500 disabled:text-slate-500  outline-none ${
+      className={`group transition-all cursor-pointer enabled:hover:bg-orange-100 disabled:pointer-none disabled:bg-black/15 disabled:border-zinc-500 disabled:text-zinc-500  outline-none ${
         className || ""
       }
       ${variantMap[variant]}
       ${variant === "ICON" ? iconSizeMap[size] : sizeMap[size]}
-    ${variant === "ICON" ? "px-1 py-1 rounded-full" : ""}`}
+    ${variant === "ICON" ? "px-1.5 py-1.5 rounded-md" : ""}`}
       onClick={handleClick}
     >
       {iconPosition === "LEFT" && icon ? (

@@ -59,7 +59,7 @@ export const createCharacterSlice: StateCreator<
           ...(state?.characterMap || {}),
         },
         pageSize,
-        pages: Math.ceil(total / pageSize),
+        pages: Math.floor(total / pageSize),
       };
     }),
   paginateSimple: (order) =>
@@ -69,21 +69,11 @@ export const createCharacterSlice: StateCreator<
         page = state.pages;
       } else if (order === "NEXT") {
         page =
-          state.currentPage >= state.pages
-            ? state.pages
-            : state.currentPage + 1;
+          state.currentPage > state.pages ? state.pages : state.currentPage + 1;
       } else if (order === "PREV") {
         page = state.currentPage > 0 ? state.currentPage - 1 : 0;
       }
-      const start = page === 0 ? page : page * state.pageSize;
-      const names = state.characterNames.slice(start, start + state.pageSize);
-      const paginatedCharacters: CharacterDisplay[] = listCreator(
-        names,
-        state.characterMap
-      );
-      //   names.forEach((name) => {
-      //     paginatedCharacters.push(state.characterMap[name]);
-      //   });
+
       return {
         currentPage: page,
       };
